@@ -1,0 +1,29 @@
+Posts should be named in the following format:
+
+Category_Title_Date_Author.md
+
+Category and Title are required, Date and Author are not.
+
+Contents of the files should plain-text with markdown formatting.
+Great "cheat sheet" of markdown shortcuts:
+https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet
+
+Example:
+
+Posts_My first post.md
+#My First Post
+##This is a subtitle
+Everthing else is regular text. Except when I do _this_ or  
+|When|I|Do|This|
+
+> We can quote things like this  
+
+We can [make links](google.com) too.
+
+If you want a specific html tag you can <add>it</add> freely.
+
+<div class="someclass">
+This includes divs like this one.
+</div>
+
+and many more!
