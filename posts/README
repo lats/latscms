@@ -27,3 +27,8 @@ This includes divs like this one.
 </div>
 
 and many more!
+
+Home.md is a special case. This is your landing page. 
+Edit the file, but do not change the filename.
+There should be only 1 file with "Home" as its category. 
+As with any other page it accepts markdown and whatever else you want to add.
