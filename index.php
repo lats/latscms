@@ -83,9 +83,8 @@ foreach ($divs as $category => $post){
 	default:
 	    $html_body .= "<div id =\"" . $category . "\" class=\"tabcontent\" style=\"display: none;\">\n";
     	    foreach($post as $obj){
-		/*Uncomment this to have the title (aka filename) added to the top of the post, though I recommend adding the title in the file with a # header).
-		$html_body .= $obj->Title ." ";
-		*/
+		//Uncomment this to have the title (aka filename) added to the top of the post, though I recommend adding the title in the file with a # header).
+		//$html_body .= $obj->Title ." ";
 		$html_body .= $obj->Text;
 		$html_body .= $parse->text('***');
 	    }
