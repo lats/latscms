@@ -50,21 +50,21 @@ $html_foot = '
 </html>';
 
 foreach ($dirs as $dir){
- if (is_dir($path . $dir)){
-  $category = $dir;
-  $files = preg_grep('/^([^.])/', scandir($path . $dir));
-  foreach($files as $file){
-   if (strpos($file,'.md') !==false){
-    $path_parts = pathinfo($file);
-    $title = $path_parts['filename'];
-    $post_obj = new stdClass;
-    $text = $parse->text(file_get_contents($path . $dir . "/" . $file));
-    $post_obj->Title = $title;
-    $post_obj->Text = $text;
-    $divs[$category][] = $post_obj;
-   }
-  }
- }
+    if (is_dir($path . $dir)){
+        $category = $dir;
+        $files = preg_grep('/^([^.])/', scandir($path . $dir));
+        foreach($files as $file){
+            if (strpos($file,'.md') !==false){
+                $path_parts = pathinfo($file);
+                $title = $path_parts['filename'];
+                $post_obj = new stdClass;
+                $text = $parse->text(file_get_contents($path . $dir . "/" . $file));
+                $post_obj->Title = $title;
+                $post_obj->Text = $text;
+                $divs[$category][] = $post_obj;
+            }
+        }
+    }
 }
 $html_body .= '<div class="container">';
 $html_body .= '<div class="tab">';
@@ -83,10 +83,10 @@ foreach ($divs as $category => $post){
 	default:
 	    $html_body .= "<div id =\"" . $category . "\" class=\"tabcontent\" style=\"display: none;\">\n";
     	    foreach($post as $obj){
-		$html_body .= $obj->Text;
+		/*Uncomment this to have the title (aka filename) added to the top of the post, though I recommend adding the title in the file with a # header).
 		$html_body .= $obj->Title ." ";
-		$html_body .= $obj->Time ." ";
-		$html_body .= $obj->Author ." ";
+		*/
+		$html_body .= $obj->Text;
 		$html_body .= $parse->text('***');
 	    }
         break;
