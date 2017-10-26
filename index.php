@@ -31,7 +31,7 @@ include('./includes/parsedown.php.class');
 $divs = array();
 $parse = new Parsedown();
 $path = "./posts/";
-$files = scandir($path);
+$dirs = preg_grep('/^([^.])/', scandir($path));
 $html_body = NULL;
 $html_head = '
 <html>
@@ -49,19 +49,22 @@ $html_foot = '
 </body>
 </html>';
 
-foreach ($files as $fullname){
-    if (strpos($fullname,'.md') !==false){
-	$path_parts = pathinfo($fullname);
-	$file = $path_parts['filename'];
-	$post_obj = new stdClass;
-	list($category,$title,$stamp,$author) = explode("_",$file);
-	$text = $parse->text(file_get_contents($path . $fullname));
-	$post_obj->Title = $title;
-	$post_obj->Time = $stamp;
-	$post_obj->Author = $author;
-	$post_obj->Text = $text;
-	$divs[$category][] = $post_obj;
-    }
+foreach ($dirs as $dir){
+ if (is_dir($path . $dir)){
+  $category = $dir;
+  $files = preg_grep('/^([^.])/', scandir($path . $dir));
+  foreach($files as $file){
+   if (strpos($file,'.md') !==false){
+    $path_parts = pathinfo($file);
+    $title = $path_parts['filename'];
+    $post_obj = new stdClass;
+    $text = $parse->text(file_get_contents($path . $dir . "/" . $file));
+    $post_obj->Title = $title;
+    $post_obj->Text = $text;
+    $divs[$category][] = $post_obj;
+   }
+  }
+ }
 }
 $html_body .= '<div class="container">';
 $html_body .= '<div class="tab">';
