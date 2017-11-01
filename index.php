@@ -30,7 +30,7 @@ a series of append executions ($var .= data).
 include('./includes/parsedown.php.class');
 $divs = array();
 $parse = new Parsedown();
-$path = "./posts/";
+$path = "./pages/";
 $dirs = preg_grep('/^([^.])/', scandir($path));
 $html_body = NULL;
 $html_head = '
@@ -50,6 +50,18 @@ $html_foot = '
 </html>';
 
 foreach ($dirs as $dir){
+    if (strpos($dir,'.md') !==false){
+        $case = pathinfo($dir);
+        $switch = $case['filename'];
+        switch ($switch){
+        case Header:
+            $header = $parse->text(file_get_contents($path . $dir));
+            break;
+        case Footer:
+            $footer = $parse->text(file_get_contents($path . $dir));
+            break;
+        }
+    }
     if (is_dir($path . $dir)){
         $category = $dir;
         $files = preg_grep('/^([^.])/', scandir($path . $dir));
@@ -66,6 +78,7 @@ foreach ($dirs as $dir){
         }
     }
 }
+$html_body .= $header;
 $html_body .= '<div class="container">';
 $html_body .= '<div class="tab">';
 foreach ($divs as $category => $post){
@@ -77,7 +90,7 @@ foreach ($divs as $category => $post){
 	case Home:		
 	    $html_body .= "<div id =\"" . $category . "\" class=\"tabcontent\">\n";
 	    foreach($post as $obj){
-		$html_body .= $obj->Text;
+    		$html_body .= $obj->Text;
 	    }
         break;
 	default:
@@ -93,6 +106,7 @@ foreach ($divs as $category => $post){
     $html_body .= "</div>\n";
 }
 $html_body .= "</div>";
+$html_body .= $footer;
 
 echo $html_head . $html_body . $html_foot;
 
