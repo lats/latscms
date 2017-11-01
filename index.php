@@ -37,6 +37,7 @@ $html_head = '
 <html>
 <head>
   <title>YOUR TITLE HERE</title>
+  <link rel="stylesheet" href="includes/main.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M\" crossorigin=\"anonymous">
   <script src="includes/list.js"></script>
 </head>
@@ -78,7 +79,11 @@ foreach ($dirs as $dir){
         }
     }
 }
+
+$html_body .= '<div class="Header">';
 $html_body .= $header;
+$html_body .= '</div>';
+
 $html_body .= '<div class="container">';
 $html_body .= '<div class="tab">';
 foreach ($divs as $category => $post){
@@ -106,7 +111,10 @@ foreach ($divs as $category => $post){
     $html_body .= "</div>\n";
 }
 $html_body .= "</div>";
+
+$html_body .= '<div class="Footer">';
 $html_body .= $footer;
+$html_body .= '</div>';
 
 echo $html_head . $html_body . $html_foot;
 
