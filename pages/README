@@ -10,10 +10,10 @@ If the files are removed the divs will still be added so that you can control th
 
 **One gotcha at the moment is that files are output in alphanumeric order instead of creation order (or the reverse).
 **I'm working on that, but for now I recommend using a naming scheme like:
-ZZZZ.md
-ZZZY.md
+0001.md
+0002.md
 ...
-AAAA.md
+ZZZZ.md
 
 Contents of the files should plain-text with markdown formatting.
 Great "cheat sheet" of markdown shortcuts:
@@ -21,7 +21,7 @@ https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet
 
 Example:
 
-ZZZZ.md
+0001.md
 #My First Post
 ##This is a subtitle
 Everthing else is regular text. Except when I do _this_ or  
