@@ -1,5 +1,5 @@
 <?php
-/*Copyright © 2017 William Bailey
+/*Copyright © 2019 William Bailey
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -71,10 +71,12 @@ foreach ($dirs as $dir){
             if (strpos($file,'.md') !==false){
                 $path_parts = pathinfo($file);
                 $title = $path_parts['filename'];
+                $time = filectime($path . $dir . "/" . $file);
                 $post_obj = new stdClass;
                 $text = $parse->text(file_get_contents($path . $dir . "/" . $file));
                 $post_obj->Title = $title;
                 $post_obj->Text = $text;
+                $post_obj->Time = date('Y-M-d H:i:s',$time);
                 $divs[$category][] = $post_obj;
             }
         }
@@ -103,6 +105,8 @@ foreach ($divs as $category => $post){
     	    foreach($post as $obj){
 		//Uncomment this to have the title (aka filename) added to the top of the post, though I recommend adding the title in the file with a # header).
 		//$html_body .= $obj->Title ." ";
+        	//Uncomment below to add the Time the post was created to the output
+        	//$html_body .= $obj->Time ." ";
 		$html_body .= $obj->Text;
 		$html_body .= $parse->text('***');
 	    }
